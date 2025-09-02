@@ -2,6 +2,7 @@ import "./Login.css";
 import { useState } from "react";
 import { usuarios } from "../utils/dataBase";
 import { useNavigate } from "react-router-dom";
+import { alertaRedireccion } from "../utils/alertas";
 
 function Login() {
   const [getEmail, setEmail] = useState("");
@@ -19,8 +20,7 @@ function Login() {
   function iniciarSesion() {
     console.log(buscarUsuario());
     if (buscarUsuario()) {
-      alert("Bienvenido al sistema " + getEmail);
-      navigate("/home");
+      alertaRedireccion("Bienvenido " + buscarUsuario().nombre, "success", navigate, "/home");
     } else {
       alert("Error de credenciales");
     }
