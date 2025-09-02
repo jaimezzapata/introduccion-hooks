@@ -1,45 +1,59 @@
 import "./Login.css";
 import { useState } from "react";
+import { usuarios } from "../utils/dataBase";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [getEmail, setEmail] = useState("");
   const [getPassword, setPassword] = useState("");
+  let navigate = useNavigate();
+
+  function buscarUsuario() {
+    let auth = usuarios.find(
+      (usuario) =>
+        getEmail == usuario.correo && getPassword == usuario.contrasena
+    );
+    return auth;
+  }
+
   function iniciarSesion() {
-    if (getEmail == "correo@correo.com" && getPassword == "admin123") {
+    console.log(buscarUsuario());
+    if (buscarUsuario()) {
       alert("Bienvenido al sistema " + getEmail);
+      navigate("/home");
     } else {
       alert("Error de credenciales");
     }
   }
   return (
-    <div class="container">
-      <div class="heading">SignIn to your account</div>
-      <form class="form" action="">
-        <div class="input-field">
+    <div className="container">
+      <div className="heading">SignIn to your account</div>
+      <form className="form" action="">
+        <div className="input-field">
           <input
             required=""
-            autocomplete="off"
+            autoComplete="off"
             type="email"
             name="email"
             id="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
         </div>
-        <div class="input-field">
+        <div className="input-field">
           <input
             required=""
-            autocomplete="off"
+            autoComplete="off"
             type="password"
             name="text"
             id="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <label for="username">Password</label>
+          <label htmlFor="username">Password</label>
         </div>
 
-        <div class="btn-container">
-          <button onClick={iniciarSesion} class="btn">
+        <div className="btn-container">
+          <button type="button" onClick={iniciarSesion} className="btn">
             Submit
           </button>
         </div>
