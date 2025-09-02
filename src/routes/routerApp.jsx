@@ -21,6 +21,6 @@ export let routerApp = [
   },
   {
     path: "*",
-    element: <h1>Error 404</h1>,
+    element: <h1>Este es un Error 404</h1>,
   },
 ];
