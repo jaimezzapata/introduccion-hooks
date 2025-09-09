@@ -2,6 +2,7 @@ import Login from "../pages/Login";
 import Servicios from "../pages/Servicios";
 import Contacto from "../pages/Contacto";
 import Home from "../pages/Home";
+import ProtegerRutas from "../components/ProtegerRutas";
 export let routerApp = [
   {
     path: "/",
@@ -17,7 +18,7 @@ export let routerApp = [
   },
   {
     path: "/home",
-    element: <Home />,
+    element: <ProtegerRutas proteger={<Home />} />,
   },
   {
     path: "*",
