@@ -3,6 +3,7 @@ import { useState } from "react";
 import { usuarios } from "../utils/dataBase";
 import { useNavigate } from "react-router-dom";
 import { alertaRedireccion } from "../utils/alertas";
+import { generarToken } from "../utils/funciones";
 
 function Login() {
   const [getEmail, setEmail] = useState("");
@@ -20,11 +21,20 @@ function Login() {
   function iniciarSesion() {
     console.log(buscarUsuario());
     if (buscarUsuario()) {
-      alertaRedireccion("Bienvenido " + buscarUsuario().nombre, "success", navigate, "/home");
+      let tokenAcceso = generarToken();
+      localStorage.setItem("token", JSON.stringify(tokenAcceso));
+      localStorage.setItem("usuario", JSON.stringify(buscarUsuario()));
+      alertaRedireccion(
+        "Bienvenido " + buscarUsuario().nombre,
+        "success",
+        navigate,
+        "/home"
+      );
     } else {
       alert("Error de credenciales");
     }
   }
+
   return (
     <div className="container">
       <div className="heading">SignIn to your account</div>
