@@ -1,5 +1,5 @@
 import "./Login.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usuarios } from "../utils/dataBase";
 import { useNavigate } from "react-router-dom";
 import { alertaRedireccion } from "../utils/alertas";
@@ -9,6 +9,13 @@ function Login() {
   const [getEmail, setEmail] = useState("");
   const [getPassword, setPassword] = useState("");
   let navigate = useNavigate();
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (token) {
+      navigate("/home", {replace: true});
+    }
+  }, []);
 
   function buscarUsuario() {
     let auth = usuarios.find(
